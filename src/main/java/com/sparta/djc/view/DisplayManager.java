@@ -1,4 +1,4 @@
 package com.sparta.djc.view;
 
-public class DisplayManager'' {
+public class DisplayManager {
 }
