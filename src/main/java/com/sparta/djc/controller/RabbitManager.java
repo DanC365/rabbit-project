@@ -2,6 +2,7 @@ package com.sparta.djc.controller;
 
 import com.sparta.djc.model.Fox;
 import com.sparta.djc.model.Rabbit;
+import com.sparta.djc.view.DisplayManager;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -14,17 +15,25 @@ public class RabbitManager {
     private int time;
     private int maleCount;
     private int femaleCount;
-    private DecimalFormat format;
 
     private List<Fox> foxes;
     List<Fox> newBirthsFox;
     List<Rabbit> newBirthsRabbit;
 
-    private final long MAX_POPULATION = 35000000;
+    private final int MAX_POPULATION;
+
+    public RabbitManager(){
+        MAX_POPULATION = 30000000;
+    }
+
+    public RabbitManager(int maxPopulation){
+        MAX_POPULATION=maxPopulation;
+    }
 
     public void startSimulation(final int MAX_TIME) {
         time = 0;
         random = new Random();
+
         rabbits = new ArrayList<>();
         rabbits.add(new Rabbit(true));
         rabbits.add(new Rabbit(false));
@@ -35,48 +44,34 @@ public class RabbitManager {
         foxes.add(new Fox(true));
         foxes.add(new Fox(false));
 
-        format = new DecimalFormat("###,###.##");
-
-
+        DisplayManager displayManager = new DisplayManager();
 
         while (time < MAX_TIME && rabbits.size() < MAX_POPULATION) {
             time++;
 
-            feedFoxes();
+            int eatenRabbits = feedFoxes();
 
-
-            Thread foxBirthThread = new Thread(() -> foxBreeding());
-            Thread rabbitBirthThread = new Thread(() -> giveBirth());
-            Thread increaseAgeThread = new Thread(() -> increaseAge());
-
-            foxBirthThread.start();
-            rabbitBirthThread.start();
-            increaseAgeThread.start();
-
-            try {
-                foxBirthThread.join();
-                rabbitBirthThread.join();
-                increaseAgeThread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if(hasMaleFox()){
+                 foxBreeding();
             }
 
-            System.out.println(format.format(newBirthsRabbit.size()) + " new rabbit children in month " + time);
-            System.out.println(format.format(newBirthsFox.size()) + " new fox children in month " + time);
+            if(maleCount>=1){
+                giveBirth();
+            }
+
+            int deadRabbits = increaseAge();
+
 
             foxes.addAll(newBirthsFox);
             rabbits.addAll(newBirthsRabbit);
 
-            System.out.println("After " + time + " months, there are " + format.format(foxes.size()) + " foxes");
-            System.out.println("After " + time + " months, there are " + format.format(rabbits.size()) + " rabbits");
-            System.out.println("Male rabbits: " + format.format(maleCount) + "| Female rabbits: " + format.format(femaleCount));
-            System.out.println("------------------------------------------------------------------");
+            displayManager.displayDetails(time,eatenRabbits,deadRabbits,newBirthsRabbit.size(),newBirthsFox.size(),rabbits.size(),foxes.size(),maleCount,femaleCount);
         }
 
         if (time == MAX_TIME) {
-            System.out.println("Maximum time " + MAX_TIME + " reached");
+            displayManager.maxTime(MAX_TIME,rabbits.size());
         } else if (rabbits.size() > MAX_POPULATION) {
-            System.out.println("Maximum population " + format.format(MAX_POPULATION) + " reached in " + time + " months");
+            displayManager.maxPopulation(MAX_POPULATION,rabbits.size(),time);
         }
 
     }
@@ -102,7 +97,7 @@ public class RabbitManager {
     }
 
 
-    private void increaseAge() {
+    private int increaseAge() {
         List<Rabbit> deadRabbits = new ArrayList<>();
         for (Rabbit rabbit : rabbits) {
             if (rabbit.incrementAge()) {
@@ -117,8 +112,8 @@ public class RabbitManager {
         for (Fox fox : foxes) {
             fox.incrementAge();
         }
-        System.out.println(format.format(deadRabbits.size()) + " rabbit deaths from age in month " + time);
         rabbits.removeAll(deadRabbits);
+        return deadRabbits.size();
     }
 
 
@@ -147,7 +142,7 @@ public class RabbitManager {
         }
     }
 
-    private void feedFoxes() {
+    private int feedFoxes() {
         int eatenRabbits = 0;
         for (Fox fox : foxes) {
             if (fox.getAge() >= 10) {
@@ -164,6 +159,6 @@ public class RabbitManager {
                 }
             }
         }
-        System.out.println(format.format(eatenRabbits) + " rabbits eaten by foxes in month " + time);
+        return eatenRabbits;
     }
 }

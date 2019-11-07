@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9925329e-ca59-4eb4-be81-0064677d689e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sparta/djc/controller/RabbitManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sparta/djc/model/Animal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sparta/djc/model/Fox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/djc/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sparta/djc/controller/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/djc/model/FemaleRabbit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/djc/model/MaleRabbit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/djc/model/Rabbit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sparta/djc/model/Rabbit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/djc/controller/RabbitManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sparta/djc/controller/RabbitManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/djc/view/DisplayManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sparta/djc/view/DisplayManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sparta/djc/controller/RabbitManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sparta/djc/controller/RabbitManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sparta/djc/view/DisplayManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sparta/djc/view/DisplayManager.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
