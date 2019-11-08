@@ -1,7 +1,5 @@
 package com.sparta.djc.model;
 
-import com.sparta.djc.controller.RabbitManager;
-
 import java.util.Random;
 
 public class Rabbit extends Animal{
@@ -28,7 +26,7 @@ public class Rabbit extends Animal{
 
     public boolean incrementAge(){
         age++;
-        return age>=60;
+        return age>=18;
     }
 
 
