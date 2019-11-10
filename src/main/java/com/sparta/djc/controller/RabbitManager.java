@@ -51,9 +51,8 @@ public class RabbitManager {
             time++;
 
             int eatenRabbits=0;
-            if(time>=13) {
-                eatenRabbits = feedFoxes();
-            }
+            eatenRabbits = feedFoxes();
+
 
             if (hasMaleFox()) {
                 foxBreeding();
@@ -153,9 +152,11 @@ public class RabbitManager {
     private int feedFoxes() {
         int eatenRabbits = 0;
         for (Fox fox : foxes) {
-            int numberEaten = random.nextInt(20) + 1;
-            eatRabbits(numberEaten);
-            eatenRabbits+=numberEaten;
+            if(fox.getAge()>=6) {
+                int numberEaten = random.nextInt(20) + 1;
+                eatRabbits(numberEaten);
+                eatenRabbits += numberEaten;
+            }
         }
         return eatenRabbits;
     }
