@@ -1,10 +1,34 @@
 package com.sparta.djc.model;
 
-public abstract class Rabbit implements Runnable{
-    private long startTime;
+import java.util.Random;
+
+public class Rabbit extends Animal{
 
     public Rabbit(){
-        startTime = System.nanoTime();
+        isFemale = (new Random()).nextBoolean();
+        age = 0;
     }
+
+    public Rabbit(Boolean isFemale){
+        this.isFemale = isFemale;
+        age = 0;
+    }
+
+    public Rabbit(Boolean isFemale, int age){
+        this.age = age;
+        this.isFemale = isFemale;
+    }
+
+    public Rabbit(int age){
+        isFemale = (new Random()).nextBoolean();
+        this.age = age;
+    }
+
+    public boolean incrementAge(){
+        age++;
+        return age>=18;
+    }
+
+
 
 }
